@@ -1,0 +1,70 @@
+﻿@model List<_24Julio.Models.Socios>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direccion)
+            </td>
+            <td>
+                @if (item.Estado == 1)
+                {
+
+                    <label> Activado </label>
+                }
+                else
+                {
+                    <label> Desactivado </label>
+                }
+
+                </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Cedula">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Cedula">Details</a> |
+               @if(item.Estado ==1)
+               {
+            <a asp-action="Desactivar" asp-route-id="@item.Cedula">Desactivar</a>
+               }
+               else
+               {
+            <a asp-action="Activar" asp-route-id="@item.Cedula">Activar</a>
+               }
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
